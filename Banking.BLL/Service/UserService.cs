@@ -28,7 +28,8 @@ namespace Banking.BLL.Service
 
         public List<User> GetAllUsers()
         {
-            return _userRepository.GetAll().ToList();
+            var users =  _userRepository.GetAll().ToList();
+            return users;
         }
 
         public User GetUserById(long id)

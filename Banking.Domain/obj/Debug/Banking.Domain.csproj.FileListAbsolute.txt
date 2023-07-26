@@ -10,3 +10,5 @@ D:\C#\Banking\Banking.Domain\obj\Debug\Banking.Domain.csproj.CoreCompileInputs.c
 D:\C#\Banking\Banking.Domain\obj\Debug\Banking.Domain.csproj.CopyComplete
 D:\C#\Banking\Banking.Domain\obj\Debug\Banking.Domain.dll
 D:\C#\Banking\Banking.Domain\obj\Debug\Banking.Domain.pdb
+D:\C#\Banking\Banking.Domain\bin\Debug\Newtonsoft.Json.dll
+D:\C#\Banking\Banking.Domain\bin\Debug\Newtonsoft.Json.xml

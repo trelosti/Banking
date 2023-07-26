@@ -16,3 +16,5 @@ D:\C#\Banking\Banking.BLL\obj\Debug\Banking.BLL.csproj.CoreCompileInputs.cache
 D:\C#\Banking\Banking.BLL\obj\Debug\Banking.BLL.csproj.CopyComplete
 D:\C#\Banking\Banking.BLL\obj\Debug\Banking.BLL.dll
 D:\C#\Banking\Banking.BLL\obj\Debug\Banking.BLL.pdb
+D:\C#\Banking\Banking.BLL\bin\Debug\Newtonsoft.Json.dll
+D:\C#\Banking\Banking.BLL\bin\Debug\Newtonsoft.Json.xml

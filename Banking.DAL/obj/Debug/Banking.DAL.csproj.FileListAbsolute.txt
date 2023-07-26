@@ -21,3 +21,5 @@ D:\C#\Banking\Banking.DAL\bin\Debug\Microsoft.Owin.xml
 D:\C#\Banking\Banking.DAL\bin\Debug\Microsoft.Owin.Cors.xml
 D:\C#\Banking\Banking.DAL\obj\Debug\Banking.DAL.Migrations.Init.resources
 D:\C#\Banking\Banking.DAL\obj\Debug\Banking.DAL.csproj.GenerateResource.cache
+D:\C#\Banking\Banking.DAL\bin\Debug\Newtonsoft.Json.dll
+D:\C#\Banking\Banking.DAL\bin\Debug\Newtonsoft.Json.xml
