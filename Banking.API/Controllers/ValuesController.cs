@@ -64,9 +64,7 @@ namespace Banking.API.Controllers
                 //Create a List of Claims, Keep claims name short    
                 var permClaims = new List<Claim>();
                 permClaims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
-                permClaims.Add(new Claim("valid", "1"));
-                permClaims.Add(new Claim("userid", "1"));
-                permClaims.Add(new Claim("name", "bilal"));
+                permClaims.Add(new Claim("login", userViewModel.Login));
 
                 //Create Security Token object by giving required parameters    
                 var token = new JwtSecurityToken(issuer, //Issure    
@@ -109,10 +107,10 @@ namespace Banking.API.Controllers
             if (identity != null)
             {
                 IEnumerable<Claim> claims = identity.Claims;
-                var name = claims.Where(p => p.Type == "name").FirstOrDefault()?.Value;
+                var login = claims.Where(p => p.Type == "login").FirstOrDefault()?.Value;
                 return new
                 {
-                    data = name
+                    data = login
                 };
 
             }

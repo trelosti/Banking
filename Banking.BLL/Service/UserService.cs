@@ -21,9 +21,14 @@ namespace Banking.BLL.Service
 
         public User ValidateUser(string login, string password)
         {
-            var userList = GetAllUsers();
-            var user = userList.FirstOrDefault(x => x.Login == login && x.Password == password);
-            return user;
+            var user = GetAllUsers().FirstOrDefault(x => x.Login == login);
+            if (user == null)
+            {
+                return null;
+            }
+
+            var isPasswordValid = BCrypt.Net.BCrypt.Verify(password, user.Password);
+            return isPasswordValid ? user : null;
         }
 
         public List<User> GetAllUsers()

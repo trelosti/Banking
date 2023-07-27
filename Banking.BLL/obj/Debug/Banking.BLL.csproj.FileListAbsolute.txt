@@ -18,3 +18,13 @@ D:\C#\Banking\Banking.BLL\obj\Debug\Banking.BLL.dll
 D:\C#\Banking\Banking.BLL\obj\Debug\Banking.BLL.pdb
 D:\C#\Banking\Banking.BLL\bin\Debug\Newtonsoft.Json.dll
 D:\C#\Banking\Banking.BLL\bin\Debug\Newtonsoft.Json.xml
+D:\C#\Banking\Banking.BLL\bin\Debug\BCrypt.Net-Next.dll
+D:\C#\Banking\Banking.BLL\bin\Debug\System.Buffers.dll
+D:\C#\Banking\Banking.BLL\bin\Debug\System.Memory.dll
+D:\C#\Banking\Banking.BLL\bin\Debug\System.Numerics.Vectors.dll
+D:\C#\Banking\Banking.BLL\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\C#\Banking\Banking.BLL\bin\Debug\BCrypt.Net-Next.xml
+D:\C#\Banking\Banking.BLL\bin\Debug\System.Buffers.xml
+D:\C#\Banking\Banking.BLL\bin\Debug\System.Memory.xml
+D:\C#\Banking\Banking.BLL\bin\Debug\System.Numerics.Vectors.xml
+D:\C#\Banking\Banking.BLL\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml

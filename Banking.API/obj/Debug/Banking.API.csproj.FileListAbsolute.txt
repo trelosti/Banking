@@ -137,3 +137,5 @@ D:\C#\Banking\Banking.API\bin\Banking.Domain.dll.config
 D:\C#\Banking\Banking.API\bin\EntityFramework.xml
 D:\C#\Banking\Banking.API\bin\EntityFramework.SqlServer.dll
 D:\C#\Banking\Banking.API\bin\EntityFramework.SqlServer.xml
+D:\C#\Banking\Banking.API\bin\BCrypt.Net-Next.dll
+D:\C#\Banking\Banking.API\bin\BCrypt.Net-Next.xml
