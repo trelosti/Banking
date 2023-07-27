@@ -43,7 +43,7 @@ namespace Banking.BLL.Service
 
         public User GetUserByLogin(string login)
         {
-            return GetAllUsers().Where(x => x.Login.Contains(login)).FirstOrDefault();
+            return GetAllUsers().FirstOrDefault(x => x.Login == login);
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Banking.BLL.Interface;
+using Banking.Domain.Entity;
+using Banking.Domain.Enum;
 using Banking.Domain.ViewModel;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -30,9 +32,17 @@ namespace Banking.BLL.Service
                 var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
                 var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
+
                 var permClaims = new List<Claim>();
                 permClaims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
                 permClaims.Add(new Claim("login", userViewModel.Login));
+
+                var userRoles = getUserRoles(userViewModel.Login);
+
+                foreach(RoleName role in userRoles)
+                {
+                    permClaims.Add(new Claim(ClaimTypes.Role, role.ToString()));
+                }
 
                 var token = new JwtSecurityToken(issuer,
                                 issuer,
@@ -46,6 +56,15 @@ namespace Banking.BLL.Service
             {
                 return "User not found";
             }
+        }
+
+        private List<RoleName> getUserRoles(string login)
+        {
+            var user = _userService.GetUserByLogin(login);
+
+            var roleIds = user.UserRoles.Select(ur => ur.RoleId);
+
+            return roleIds.Select(r => (RoleName)r).ToList();
         }
     }
 }

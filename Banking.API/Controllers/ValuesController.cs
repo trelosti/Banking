@@ -79,7 +79,7 @@ namespace Banking.API.Controllers
             }
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public Object GetName2()
         {
