@@ -23,7 +23,7 @@ namespace Banking.Controllers
         [Route("api/users/{id}")]
         public IHttpActionResult GetFirstUser(int id)
         {
-            var user = _userService.GetAllUsers().FirstOrDefault(x => x.Id == id);
+            var user = _userService.GetUserById(id);
             return Ok(user);
         }
     }

@@ -28,18 +28,17 @@ namespace Banking.BLL.Service
 
         public List<User> GetAllUsers()
         {
-            var users =  _userRepository.GetAll().ToList();
-            return users;
+            return _userRepository.GetAll().ToList();
         }
 
         public User GetUserById(long id)
         {
-            throw new NotImplementedException();
+            return GetAllUsers().FirstOrDefault(x => x.Id == id);
         }
 
         public User GetUserByLogin(string login)
         {
-            throw new NotImplementedException();
+            return GetAllUsers().Where(x => x.Login.Contains(login)).FirstOrDefault();
         }
     }
 }
