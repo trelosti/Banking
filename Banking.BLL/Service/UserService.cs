@@ -19,10 +19,10 @@ namespace Banking.BLL.Service
             _userRepository = new UserRepository();
         }
 
-        public User ValidateUser(string email, string password)
+        public User ValidateUser(string login, string password)
         {
             var userList = GetAllUsers();
-            var user = userList.FirstOrDefault(x => x.Email == email && x.Password == password);
+            var user = userList.FirstOrDefault(x => x.Login == login && x.Password == password);
             return user;
         }
 

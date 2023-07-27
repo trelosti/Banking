@@ -14,7 +14,5 @@ namespace Banking.Domain.ViewModel
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-
-        public ICollection<string> UserRoles { get; set; }
     }
 }
