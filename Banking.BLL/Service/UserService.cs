@@ -14,9 +14,9 @@ namespace Banking.BLL.Service
     {
         private readonly IBaseRepository<User> _userRepository;
 
-        public UserService()
+        public UserService(IBaseRepository<User> userRepository)
         {
-            _userRepository = new UserRepository();
+            _userRepository = userRepository;
         }
 
         public User ValidateUser(string login, string password)

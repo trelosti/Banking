@@ -11,18 +11,12 @@ using System.Text;
 using System.Collections;
 using Banking.Domain.ViewModel;
 using Banking.BLL.Service;
+using Banking.BLL.Interface;
 
 namespace Banking.API.Controllers
 {
     public class ValuesController : ApiController
     {
-        private readonly AuthService _authService;
-
-        public ValuesController()
-        {
-            _authService = new AuthService();
-        }
-
         // GET api/values
         public IEnumerable<string> Get()
         {
@@ -48,17 +42,6 @@ namespace Banking.API.Controllers
         // DELETE api/values/5
         public void Delete(int id)
         {
-        }
-
-        [HttpGet]
-        public Object GetToken(UserViewModel userViewModel)
-        {
-            var token = _authService.GenerateToken(userViewModel);
-
-            return new
-            {
-                data = token
-            };
         }
 
         [HttpPost]

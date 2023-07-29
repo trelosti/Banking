@@ -15,11 +15,11 @@ namespace Banking.BLL.Service
 {
     public class AuthService : IAuthService
     {
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
 
-        public AuthService()
+        public AuthService(IUserService userService)
         {
-            _userService = new UserService();
+            _userService = userService;
         }
 
         public string GenerateToken(UserViewModel userViewModel)
@@ -46,7 +46,7 @@ namespace Banking.BLL.Service
                 var token = new JwtSecurityToken(issuer,
                                 issuer,
                                 permClaims,
-                                expires: DateTime.Now.AddMinutes(5),
+                                expires: DateTime.Now.AddMinutes(30),
                                 signingCredentials: credentials);
                 var jwt_token = new JwtSecurityTokenHandler().WriteToken(token);
                 return jwt_token;
