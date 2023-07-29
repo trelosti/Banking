@@ -27,14 +27,13 @@ namespace Banking.BLL.Service
             if (_userService.ValidateUser(userViewModel.Login, userViewModel.Password) != null)
             {
                 string key = "ImX6m+1HiO0LZmeHTufvHTJAm2DH2MeHcBr12zh740sMQ+SyQ9wN7jz67bayV23T";
-                var issuer = "http://mysite.com";
+                var issuer = "https://BankClient.Web";
 
                 var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
                 var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
 
                 var permClaims = new List<Claim>();
-                permClaims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
                 permClaims.Add(new Claim("login", userViewModel.Login));
 
                 var userRoles = getUserRoles(userViewModel.Login);

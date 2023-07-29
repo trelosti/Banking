@@ -24,8 +24,8 @@ namespace Banking.API
                         ValidateIssuer = true,
                         ValidateAudience = true,
                         ValidateIssuerSigningKey = true,
-                        ValidIssuer = "http://mysite.com", //some string, normally web url,  
-                        ValidAudience = "http://mysite.com",
+                        ValidIssuer = "https://BankClient.Web", 
+                        ValidAudience = "https://BankClient.Web",
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ImX6m+1HiO0LZmeHTufvHTJAm2DH2MeHcBr12zh740sMQ+SyQ9wN7jz67bayV23T"))
                     }
                 });

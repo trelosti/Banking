@@ -45,5 +45,10 @@ namespace Banking.BLL.Service
         {
             return GetAllUsers().FirstOrDefault(x => x.Login == login);
         }
+
+        public long GetUserIdByLogin(string login)
+        {
+            return GetAllUsers().FirstOrDefault(x => x.Login == login).Id;
+        }
     }
 }
