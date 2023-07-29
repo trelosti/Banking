@@ -34,20 +34,27 @@ namespace Banking.BLL.Service
 
 
                 var permClaims = new List<Claim>();
-                permClaims.Add(new Claim("login", userViewModel.Login));
 
                 var userRoles = getUserRoles(userViewModel.Login);
 
-                foreach(RoleName role in userRoles)
+                permClaims.Add(new Claim("iat", ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds().ToString()));
+                permClaims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
+
+                foreach (RoleName role in userRoles)
                 {
                     permClaims.Add(new Claim(ClaimTypes.Role, role.ToString()));
                 }
 
-                var token = new JwtSecurityToken(issuer,
+                var header = new JwtHeader(signingCredentials: credentials);
+
+                var payload = new JwtPayload(issuer,
                                 issuer,
                                 permClaims,
+                                null,
                                 expires: DateTime.Now.AddMinutes(30),
-                                signingCredentials: credentials);
+                                issuedAt: DateTime.Now);
+
+                var token = new JwtSecurityToken(header, payload);
                 var jwt_token = new JwtSecurityTokenHandler().WriteToken(token);
                 return jwt_token;
             }

@@ -71,7 +71,7 @@
                     contentType: 'application/json',
                     data: JSON.stringify(userCredentials),
                     success: function (response) {
-                        sessionStorage.setItem("accessToken", response.data);
+                        window.location.replace('@Url.Content("~/Main/Main")');
                     },
                     error: function (jqXHR) {
                         $('#divErrorText').text(jqXHR.responseText);
@@ -79,6 +79,18 @@
                     }
                 });
             });
+
+            @*$.ajax({
+                url: "GET",
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authority", authorizationToken);
+                },
+                data: "json=" + escape(JSON.stringify(createRequestObject)),
+                processData: false,
+                success: function (msg) {
+                    $("#results").append("The result =" + StringifyPretty(msg));
+                }
+            });*@
         });
     </script>
 </body>

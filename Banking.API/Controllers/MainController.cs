@@ -11,6 +11,7 @@ namespace Banking.API.Controllers
     {
         [Authorize]
         [HttpGet]
+        [Route("main")]
         public ActionResult Main()
         {
             ViewBag.Title = "Main Page";

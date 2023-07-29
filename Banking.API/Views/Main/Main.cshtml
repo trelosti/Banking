@@ -1,2 +1,19 @@
-﻿<h2>Main</h2>
+﻿<h2>
+    Main
+
+    $.ajax({
+    url: '/Main/Main',
+    method: 'GET',
+    beforeSend: function (xhr) {
+    xhr.setRequestHeader('Authorization', 'Bearer ' + sessionStorage.getItem('accessToken'));
+    },
+    success: function (response) {
+
+    },
+    error: function (jqXHR) {
+    $('#divErrorText').text(jqXHR.responseText);
+    $('#divError').show('fade');
+    }
+    });
+</h2>
 
