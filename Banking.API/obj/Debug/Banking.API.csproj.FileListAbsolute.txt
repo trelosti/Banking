@@ -143,3 +143,5 @@ D:\C#\Banking\Banking.API\bin\Unity.Abstractions.dll
 D:\C#\Banking\Banking.API\bin\Unity.Container.dll
 D:\C#\Banking\Banking.API\bin\Unity.Abstractions.pdb
 D:\C#\Banking\Banking.API\bin\Unity.Container.pdb
+D:\C#\Banking\Banking.API\bin\Microsoft.Owin.Security.Cookies.dll
+D:\C#\Banking\Banking.API\bin\Microsoft.Owin.Security.Cookies.xml

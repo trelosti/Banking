@@ -12,6 +12,7 @@ using System.Collections;
 using Banking.Domain.ViewModel;
 using Banking.BLL.Service;
 using Banking.BLL.Interface;
+using Banking.API.Providers;
 
 namespace Banking.API.Controllers
 {
@@ -70,10 +71,10 @@ namespace Banking.API.Controllers
             if (identity != null)
             {
                 IEnumerable<Claim> claims = identity.Claims;
-                var login = claims.Where(p => p.Type == "login").FirstOrDefault()?.Value;
+                var userId = claims.Where(p => p.Type == "userId").FirstOrDefault()?.Value;
                 return new
                 {
-                    data = login
+                    data = userId
                 };
 
             }

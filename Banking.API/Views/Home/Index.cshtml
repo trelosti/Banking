@@ -79,18 +79,6 @@
                     }
                 });
             });
-
-            @*$.ajax({
-                url: "GET",
-                beforeSend: function (request) {
-                    request.setRequestHeader("Authority", authorizationToken);
-                },
-                data: "json=" + escape(JSON.stringify(createRequestObject)),
-                processData: false,
-                success: function (msg) {
-                    $("#results").append("The result =" + StringifyPretty(msg));
-                }
-            });*@
         });
     </script>
 </body>

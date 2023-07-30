@@ -1,6 +1,8 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Banking.API.Providers;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Jwt;
 using Owin;
 using System;
@@ -27,7 +29,8 @@ namespace Banking.API
                         ValidIssuer = "https://BankClient.Web", 
                         ValidAudience = "https://BankClient.Web",
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ImX6m+1HiO0LZmeHTufvHTJAm2DH2MeHcBr12zh740sMQ+SyQ9wN7jz67bayV23T"))
-                    }
+                    },
+                    Provider = new MvcJwtAuthProvider() 
                 });
         }
     }

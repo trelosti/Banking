@@ -36,9 +36,11 @@ namespace Banking.BLL.Service
                 var permClaims = new List<Claim>();
 
                 var userRoles = getUserRoles(userViewModel.Login);
+                var userId = _userService.GetUserIdByLogin(userViewModel.Login);
 
                 permClaims.Add(new Claim("iat", ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds().ToString()));
                 permClaims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
+                permClaims.Add(new Claim("userId", userId.ToString()));
 
                 foreach (RoleName role in userRoles)
                 {
@@ -56,6 +58,7 @@ namespace Banking.BLL.Service
 
                 var token = new JwtSecurityToken(header, payload);
                 var jwt_token = new JwtSecurityTokenHandler().WriteToken(token);
+
                 return jwt_token;
             }
             else
