@@ -1,64 +1,103 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>Bakai Bank</title>
     <meta charset="utf-8" />
-    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/css/login.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
-<body style="padding-top:20px">
-    <div class="col-md-10 col-md-offset-1">
-        <div class="well">
-            <!--Table to capture username and password-->
-            <table class="table table-bordered">
-                <thead>
-                    <tr class="success">
-                        <th colspan="2">
-                            Existing User Login
-                            <a href="Register.html" class="btn btn-success pull-right">
-                                Register
-                            </a>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Login</td>
-                        <td>
-                            <input type="text" id="txtLogin" placeholder="Login" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Password</td>
-                        <td>
-                            <input type="password" id="txtPassword"
-                                   placeholder="Password" />
-                        </td>
-                    </tr>
-                    <tr class="success">
-                        <td colspan="2">
-                            <input id="btnLogin" class="btn btn-success" type="button"
-                                   value="Login" />
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <!--Bootstrap alert to display error message if the login fails-->
-            <div id="divError" class="alert alert-danger collapse">
-                <a id="linkClose" href="#" class="close">&times;</a>
-                <div id="divErrorText"></div>
+<body>
+    <nav class="login_top">
+        <div class="super_container container">
+            <div class="row">
+
+                <div class="col-md-4 col-sm-4 ">
+                    <a href="#" class="instruction_block">Посмотреть инструкцию</a>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <a href="#" class="logo_block">
+                        <img src="~/Content/img/logo_bakai.png" alt="">
+                    </a>
+                </div>
+                <div class="col-md-4 col-sm-4 ">
+
+                </div>
             </div>
         </div>
+    </nav>
+    <h1 class="text-center login_title">
+        Добро пожаловать в
+        <br>
+        Онлайн-банкинг Бакай Бизнес
+    </h1>
+    <div class="login_form">
+        <div class="login_form_title">
+            <span>
+                Пожалуйста, введите
+                Имя пользователя и Пароль
+            </span>
+        </div>
+        <div class="input_form">
+            <div class="input_group">
+                <input id="txtLogin" class="input_field" type="text" placeholder="Логин">
+                <span class="field_validation_error">
+                    ::before
+                    Поле Логин обязательно
+                </span>
+            </div>
+            <div class="input_group password_keyboard">
+                <input id="txtPassword" class="input_field" type="password" placeholder="Введите пароль" />
+            </div>
+            <span class="field_validation_error">
+                ::before
+                Поле Пароль обязательно
+            </span>
+            <p style="display: inline-block;margin-top:7px">
+                <label style="display: inline-block">
+                    <input type="checkbox" style="width: 16px; height: 16px; display: inline-block" class="password-checkbox">
+                    <span style="display: inline-block;vertical-align:text-top">
+                        Показать пароль
+                    </span>
+                </label>
+            </p>
+        </div>
+        <div class="login_form_button">
+            <button id="btnLogin" class="submit_btn">Войти в систему</button>
+        </div>
+        <h5>Внимание!!! В случае неверного введения логина или пароля более чем 3 раза, вход в систему для Вас будет заблокирован.</h5>
+    </div>
+
+    <!-- Modal HTML -->
+    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="infoModalLabel">Modal Title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Modal Content
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal_info">
+        <a href="#" id="modal_link">
+            Информация
+        </a>
     </div>
 
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
-
-            $('#linkClose').click(function () {
-                $('#divError').hide('fade');
-            });
-
             $('#btnLogin').click(function () {
                 var userCredentials = {
                     Login: $('#txtLogin').val(),
@@ -74,10 +113,13 @@
                         window.location.replace('@Url.Content("~/Main/Main")');
                     },
                     error: function (jqXHR) {
-                        $('#divErrorText').text(jqXHR.responseText);
-                        $('#divError').show('fade');
+
                     }
                 });
+            });
+
+            $(".modal_info a").click(function () {
+                $('#infoModal').modal('show');
             });
         });
     </script>
