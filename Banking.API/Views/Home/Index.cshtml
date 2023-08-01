@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>Bakai Bank</title>
@@ -41,16 +45,14 @@
         <div class="input_form">
             <div class="input_group">
                 <input id="txtLogin" class="input_field" type="text" placeholder="Логин">
-                <span class="field_validation_error">
-                    ::before
+                <span class="field_validation_error" id="loginMissing">
                     Поле Логин обязательно
                 </span>
             </div>
             <div class="input_group password_keyboard">
                 <input id="txtPassword" class="input_field" type="password" placeholder="Введите пароль" />
             </div>
-            <span class="field_validation_error">
-                ::before
+            <span class="field_validation_error" id="passwordMissing">
                 Поле Пароль обязательно
             </span>
             <p style="display: inline-block;margin-top:7px">
@@ -69,57 +71,101 @@
     </div>
 
     <!-- Modal HTML -->
-    <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="infoModalLabel">Modal Title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="modal-header text-center">
+                    <h1 class="modal-title fs-5 w-100" id="staticBackdropLabel">Информация</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Modal Content
+                    ОАО «Бакай Банк» никогда не проводит рассылок клиентам с почтового ящика, требующих подтверждение пароля, логина или другой конфиденциальной информации, через электронные сообщения.
+                    <br />
+                    Если Вы получили подозрительное сообщение, запрашивающее Ваши личные данные: логин, пароль,пин-коды и др. конфиденциальную информацию, пожалуйста игнорируйте подобные сообщения. Просьба сообщать о таких случаях нам на почту service@bakai.kg, либо оставлять сообщения в Call-Центр: +996 (312) 61 00 61
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Закрыть</button>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="modal_info">
-        <a href="#" id="modal_link">
+        <a href="#" id="modal_link" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             Информация
         </a>
     </div>
 
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
+            function validateUsername() {
+                const usernameValue = $("#txtLogin").val();
+                if (usernameValue.length === 0) {
+                    $("#loginMissing").css("display", "inline-block");
+                    $("#loginMissing").show();
+                    return false;
+                } else {
+                    $("#loginMissing").hide();
+                    return true;
+                }
+            }
+
+            function validatePassword() {
+                const passwordValue = $("#txtPassword").val();
+                if (passwordValue.length === 0) {
+                    $("#passwordMissing").css("display", "inline-block");
+                    $("#passwordMissing").show();
+                    return false;
+                } else {
+                    $("#passwordMissing").hide();
+                    return true;
+                }
+            }
+
             $('#btnLogin').click(function () {
-                var userCredentials = {
-                    Login: $('#txtLogin').val(),
-                    Password: $('#txtPassword').val()
-                };
+                const isUsernameValid = validateUsername();
+                const isPasswordValid = validatePassword();
 
-                $.ajax({
-                    url: '/api/auth/login',
-                    method: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify(userCredentials),
-                    success: function (response) {
-                        window.location.replace('@Url.Content("~/Main/Main")');
-                    },
-                    error: function (jqXHR) {
+                if (isUsernameValid && isPasswordValid) {
+                    var userCredentials = {
+                        Login: $('#txtLogin').val(),
+                        Password: $('#txtPassword').val()
+                    };
 
-                    }
-                });
+                    $.ajax({
+                        url: '/api/auth/login',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(userCredentials),
+                        success: function (response) {
+                            window.location.replace('@Url.Content("~/Main/Main")');
+                        },
+                        error: function (jqXHR) {
+
+                        }
+                    });
+                }
             });
 
             $(".modal_info a").click(function () {
                 $('#infoModal').modal('show');
+            });
+
+            $("#loginMissing").hide();
+            
+            $("#passwordMissing").hide();
+            
+
+            $(".password-checkbox").on("change", function () {
+                var passwordInput = $("#txtPassword");
+                if (this.checked) {
+                    passwordInput.attr("type", "text");
+                } else {
+                    passwordInput.attr("type", "password");
+                }
             });
         });
     </script>
