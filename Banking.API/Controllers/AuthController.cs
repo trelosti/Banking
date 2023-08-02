@@ -22,17 +22,10 @@ namespace Banking.API.Controllers
         }
 
         [HttpPost]
-        public Object Login(UserViewModel userViewModel)
+        public Object Login(LoginViewModel loginViewModel)
         {
-            var token = _authService.GenerateToken(userViewModel);
-
-            var cookie = new HttpCookie("accessToken", token)
-            {
-                Expires = DateTime.Now.AddMinutes(30),
-                HttpOnly = true
-            };
-
-            HttpContext.Current.Response.Cookies.Add(cookie);
+            var token = _authService.GenerateToken(loginViewModel);
+            
 
             return new
             {

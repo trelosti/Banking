@@ -9,6 +9,6 @@ namespace Banking.BLL.Interface
 {
     public interface IAuthService
     {
-        string GenerateToken(UserViewModel userViewModel);
+        string GenerateToken(LoginViewModel loginViewModel);
     }
 }

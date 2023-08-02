@@ -10,6 +10,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Banking.BLL.Service
 {
@@ -22,9 +23,9 @@ namespace Banking.BLL.Service
             _userService = userService;
         }
 
-        public string GenerateToken(UserViewModel userViewModel)
+        public string GenerateToken(LoginViewModel loginViewModel)
         {
-            if (_userService.ValidateUser(userViewModel.Login, userViewModel.Password) != null)
+            if (_userService.ValidateUser(loginViewModel.Login, loginViewModel.Password) != null)
             {
                 string key = "ImX6m+1HiO0LZmeHTufvHTJAm2DH2MeHcBr12zh740sMQ+SyQ9wN7jz67bayV23T";
                 var issuer = "https://BankClient.Web";
@@ -35,8 +36,8 @@ namespace Banking.BLL.Service
 
                 var permClaims = new List<Claim>();
 
-                var userRoles = getUserRoles(userViewModel.Login);
-                var userId = _userService.GetUserIdByLogin(userViewModel.Login);
+                var userRoles = getUserRoles(loginViewModel.Login);
+                var userId = _userService.GetUserIdByLogin(loginViewModel.Login);
 
                 permClaims.Add(new Claim("iat", ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeSeconds().ToString()));
                 permClaims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
@@ -59,10 +60,23 @@ namespace Banking.BLL.Service
                 var token = new JwtSecurityToken(header, payload);
                 var jwt_token = new JwtSecurityTokenHandler().WriteToken(token);
 
+                var cookie = new HttpCookie("accessToken", jwt_token)
+                {
+                    Expires = DateTime.Now.AddMinutes(30),
+                    HttpOnly = true
+                };
+
+                HttpContext.Current.Response.Cookies.Add(cookie);
+
                 return jwt_token;
             }
             else
             {
+                if (HttpContext.Current.Request.Cookies["accessToken"] != null)
+                {
+                    HttpContext.Current.Response.Cookies["accessToken"].Expires = DateTime.Now.AddDays(-1);
+                }
+
                 return "User not found";
             }
         }
